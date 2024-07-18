@@ -1,25 +1,25 @@
 from transformers import pipeline
 
-# Load sentiment analysis and text generation models
-sentiment_analysis = pipeline('sentiment-analysis')
-text_generator = pipeline('text-generation', model='distilgpt2')
-
 def generate_comments(content):
-    # Perform sentiment analysis
-    sentiment = sentiment_analysis(content)[0]
+    # Specify the model name and revision
+    model_name = "distilbert-base-uncased-finetuned-sst-2-english"
+    sentiment_pipeline = pipeline("sentiment-analysis", model=model_name, revision="af0f99b")
 
-    # Generate comments based on sentiment
-    friendly_comment = text_generator(f"{content} This is really nice!")[0]['generated_text']
-    funny_comment = text_generator(f"{content} Haha, that's hilarious!")[0]['generated_text']
-    congratulating_comment = text_generator(f"{content} Congratulations!")[0]['generated_text']
-    questioning_comment = text_generator(f"{content} Can you explain more about this?")[0]['generated_text']
-    disagreement_comment = text_generator(f"{content} I don't agree with this.")[0]['generated_text']
+    # Dummy function to simulate comment generation based on sentiment
+    results = sentiment_pipeline(content)
+    sentiment = results[0]['label']
 
     comments = {
-        'friendly': friendly_comment,
-        'funny': funny_comment,
-        'congratulating': congratulating_comment,
-        'questioning': questioning_comment,
-        'disagreement': disagreement_comment
+        'friendly': 'This is a friendly comment.',
+        'funny': 'This is a funny comment.',
+        'congratulating': 'Congratulations on your achievement!',
+        'questioning': 'Could you clarify this point?',
+        'disagreement': 'I disagree with this statement.'
     }
+
+    if sentiment == 'POSITIVE':
+        comments['friendly'] = 'Great job! This is very positive.'
+    else:
+        comments['disagreement'] = 'I have some concerns about this.'
+
     return comments
