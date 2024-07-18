@@ -1,29 +1,21 @@
-from textblob import TextBlob
-from nltk.sentiment import SentimentIntensityAnalyzer
 from transformers import pipeline
+from textblob import TextBlob
 
-def analyze_sentiment(text):
-    # TextBlob for basic sentiment
-    blob = TextBlob(text)
+def analyze_sentiment(content):
+    transformer_sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
+    transformer_sentiment = transformer_sentiment_pipeline(content)[0]
+
+    blob = TextBlob(content)
     polarity = blob.sentiment.polarity
+    nltk_sentiment = 'positive' if polarity > 0 else 'negative' if polarity < 0 else 'neutral'
 
-    # NLTK for more detailed sentiment
-    sia = SentimentIntensityAnalyzer()
-    nltk_sentiment = sia.polarity_scores(text)
-
-    # transformers for advanced sentiment
-    sentiment_pipeline = pipeline("sentiment-analysis")
-    transformer_sentiment = sentiment_pipeline(text)
-
-    return polarity, nltk_sentiment, transformer_sentiment
+    return polarity, nltk_sentiment, transformer_sentiment['label']
 
 def detect_tone(polarity, nltk_sentiment, transformer_sentiment):
-    # Simplified tone detection logic
-    if polarity > 0:
-        tone = "positive"
-    elif polarity < 0:
-        tone = "negative"
+    # Example tone detection logic
+    if transformer_sentiment == 'POSITIVE':
+        return 'positive'
+    elif transformer_sentiment == 'NEGATIVE':
+        return 'negative'
     else:
-        tone = "neutral"
-
-    return tone
+        return 'neutral'
