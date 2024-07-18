@@ -1,20 +1,29 @@
-{% extends "layout/base.html" %}
-
-{% block title %}Home - Comment Generation Tool{% endblock %}
-
-{% block content %}
-<h1>Comment Generation Tool</h1>
-<form method="post">
-    <textarea name="content" rows="10" cols="50" placeholder="Enter content here...">{{ content }}</textarea><br>
-    <button type="submit">Generate Comments</button>
-</form>
-{% if comments %}
-    <h2>Generated Comments:</h2>
-    <p><strong>Friendly:</strong> {{ comments.friendly }}</p>
-    <p><strong>Funny:</strong> {{ comments.funny }}</p>
-    <p><strong>Congratulating:</strong> {{ comments.congratulating }}</p>
-    <p><strong>Questioning:</strong> {{ comments.questioning }}</p>
-    <p><strong>Disagreement:</strong> {{ comments.disagreement }}</p>
-    <p><strong>Processing Time:</strong> {{ processing_time }} seconds</p>
-{% endif %}
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comment Generation Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Content Analysis and Comment Generation Tool</h1>
+        <form method="post">
+            <textarea name="content" rows="10" cols="80" placeholder="Paste your content here...">{{ content }}</textarea>
+            <br>
+            <button type="submit">Analyze and Generate Comments</button>
+        </form>
+        {% if comments %}
+        <h2>Generated Comments:</h2>
+        <ul>
+            <li><strong>Friendly:</strong> {{ comments.friendly }}</li>
+            <li><strong>Funny:</strong> {{ comments.funny }}</li>
+            <li><strong>Congratulating:</strong> {{ comments.congratulating }}</li>
+            <li><strong>Questioning:</strong> {{ comments.questioning }}</li>
+            <li><strong>Disagreement:</strong> {{ comments.disagreement }}</li>
+        </ul>
+        <p><strong>Processing Time:</strong> {{ processing_time }} seconds</p>
+        {% endif %}
+    </div>
+</body>
+</html>
