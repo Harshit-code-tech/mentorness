@@ -1,3 +1,6 @@
+from .analysis import analyze_sentiment, detect_tone
+
+
 def generate_friendly_comment(content):
     return f"Great read! {content[:50]}... Keep it up!"
 
