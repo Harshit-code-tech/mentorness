@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "layout/base.html" %}
 
-</body>
-</html>
+{% block title %}Home - Comment Generation Tool{% endblock %}
+
+{% block content %}
+<h1>Comment Generation Tool</h1>
+<form method="post">
+    <textarea name="content" rows="10" cols="50" placeholder="Enter content here..."></textarea><br>
+    <button type="submit">Generate Comments</button>
+</form>
+{% if comments %}
+    <h2>Generated Comments:</h2>
+    <p><strong>Friendly:</strong> {{ comments.friendly }}</p>
+    <p><strong>Funny:</strong> {{ comments.funny }}</p>
+    <p><strong>Congratulating:</strong> {{ comments.congratulating }}</p>
+    <p><strong>Questioning:</strong> {{ comments.questioning }}</p>
+    <p><strong>Disagreement:</strong> {{ comments.disagreement }}</p>
+{% endif %}
+{% endblock %}

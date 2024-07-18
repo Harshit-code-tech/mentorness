@@ -1,0 +1,7 @@
+Flask
+nltk
+textblob
+transformers
+sklearn
+pandas
+numpy
