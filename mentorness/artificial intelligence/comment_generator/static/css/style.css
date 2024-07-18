@@ -1,20 +1,53 @@
+/* Add your CSS styles here */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    transition: background-color 0.5s ease;
 }
 
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
+body:hover {
+    background-color: #e0e0e0;
 }
 
-h1, h2 {
+h1 {
     color: #333;
+    animation: fadeIn 2s ease-in-out;
+}
+
+form {
+    margin-bottom: 20px;
+    animation: slideIn 1s ease-out;
 }
 
 textarea {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-20px); }
+    to { transform: translateY(0); }
 }

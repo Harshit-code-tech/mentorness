@@ -1,4 +1,4 @@
-{% extends "layout/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}Home - Comment Generation Tool{% endblock %}
 
@@ -15,5 +15,6 @@
     <p><strong>Congratulating:</strong> {{ comments.congratulating }}</p>
     <p><strong>Questioning:</strong> {{ comments.questioning }}</p>
     <p><strong>Disagreement:</strong> {{ comments.disagreement }}</p>
+    <p><strong>Processing Time:</strong> {{ processing_time }} seconds</p>
 {% endif %}
 {% endblock %}
