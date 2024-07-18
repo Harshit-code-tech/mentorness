@@ -147,7 +147,7 @@ column_trans = ColumnTransformer(transformers=[
 ], remainder='passthrough')
 
 #%%
-# Split data into train and test sets
+# Split data into train and tests sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=45)
 
 #%%
@@ -319,7 +319,7 @@ pipe.fit(X_train, y_train)
 from sklearn.metrics import confusion_matrix, classification_report
 import pandas as pd
 
-# Predict the test set results
+# Predict the tests set results
 y_pred = pipe.predict(X_test)
 
 # Create a DataFrame from the confusion matrix
@@ -397,7 +397,7 @@ def predict_fraud_best(input_data):
 #%%
 import numpy as np
 
-# Transform the test data
+# Transform the tests data
 X_test_transformed = column_trans.transform(X_test)
 
 # Make predictions

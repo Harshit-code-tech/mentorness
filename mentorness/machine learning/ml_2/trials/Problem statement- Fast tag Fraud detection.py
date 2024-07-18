@@ -251,7 +251,7 @@ cat_col.append('Speed_Type')
 #%% md
 # ### Feature Selection
 #%% md
-# #### Statistical Feature Selection (Categorical Vs Continuous) using ANOVA test
+# #### Statistical Feature Selection (Categorical Vs Continuous) using ANOVA tests
 # 
 # Analysis of variance(ANOVA) is performed to check if there is any relationship between the given continuous and categorical variable
 # 
@@ -281,7 +281,7 @@ Anovatest(inpdata = df, targetvariable = target, predictor = num_col)
 #%% md
 # #### Statistical Feature Selection (Categorical Vs Categorical) using Chi-Square Test
 # 
-# Chi-Square test is conducted to check the correlation between two categorical variables
+# Chi-Square tests is conducted to check the correlation between two categorical variables
 # 
 # * Assumption(H0): The two columns are NOT related to each other
 # * Result of Chi-Sq Test: The Probability of H0 being True

@@ -302,7 +302,7 @@ print(f"Confusion Matrix:\n{confusion_matrix(y_test, y_pred)}")
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Predict the test set results
+# Predict the tests set results
 y_pred = pipeline.predict(X_test)
 
 # Create a confusion matrix
