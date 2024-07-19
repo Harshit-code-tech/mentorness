@@ -5,48 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comment Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
 </head>
 <body>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-
     <div class="container">
         <h1>Comment Generator</h1>
-        <form id="commentForm" method="post" action="/">
-            <label for="content">Enter your content:</label>
-            <textarea id="content" name="content" rows="10" required>{{ content }}</textarea>
+        <form action="/" method="post">
+            <textarea name="content" rows="6" placeholder="Enter text here...">{{ content }}</textarea>
             <button type="submit">Analyze</button>
         </form>
-        <div class="results" id="results">
-            {% if processing_time %}
-                <p>Processing time: {{ processing_time | round(2) }} seconds</p>
-            {% endif %}
-            {% if error %}
-                <p class="error">{{ error }}</p>
-            {% endif %}
-            {% if comments %}
-                <p class="tone">Tone analyzed as: {{ comments['tone'] }}</p>
-                {% for type, comment in comments.items() %}
-                    {% if type != 'tone' %}
-                        <div class="comment {{ type }}">
-                            <h3>{{ type.capitalize() }}</h3>
-                            <p>{{ comment }}</p>
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
+        {% if comments %}
+        <div class="results">
+            <h2>Processing Time: {{ processing_time | round(2) }} seconds</h2>
+            <div class="tone">Tone Analyzed as: {{ comments['tone'] }}</div>
+            {% for type, comment in comments.items() %}
+                {% if type != 'tone' %}
+                <div class="comment {{ type }}">
+                    <h3>{{ type | capitalize }}</h3>
+                    <p>{{ comment }}</p>
+                </div>
+                {% endif %}
+            {% endfor %}
         </div>
+        {% endif %}
+        {% if comments['tone'] == 'error' %}
+        <div class="error">
+            An error occurred while generating comments.
+        </div>
+        {% endif %}
     </div>
-    <script>
-        document.getElementById("commentForm").addEventListener("submit", function(event) {
-            const resultsDiv = document.getElementById("results");
-            resultsDiv.innerHTML = "<p>Processing...</p>";
-        });
-    </script>
 </body>
 </html>

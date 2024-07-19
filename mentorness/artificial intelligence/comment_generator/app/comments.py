@@ -1,5 +1,5 @@
 import random
-from .analysis import analyze_sentiment, detect_tone
+from .analysis import analyze_sentiment
 
 def generate_friendly_comment(content):
     friendly_templates = [
@@ -47,20 +47,30 @@ def generate_disagreement_comment(content):
     return random.choice(disagreement_templates).format(snippet=snippet)
 
 def generate_comments(content):
-    polarity, nltk_sentiment, transformer_sentiment, vader_sentiment = analyze_sentiment(content)
-    tone = detect_tone(polarity, nltk_sentiment, transformer_sentiment, vader_sentiment)
+    try:
+        polarity, nltk_sentiment, transformer_sentiment, vader_sentiment, tone = analyze_sentiment(content)
 
-    friendly = generate_friendly_comment(content)
-    funny = generate_funny_comment(content)
-    congratulating = generate_congratulating_comment(content)
-    questioning = generate_questioning_comment(content)
-    disagreement = generate_disagreement_comment(content)
+        friendly = generate_friendly_comment(content)
+        funny = generate_funny_comment(content)
+        congratulating = generate_congratulating_comment(content)
+        questioning = generate_questioning_comment(content)
+        disagreement = generate_disagreement_comment(content)
 
-    return {
-        "friendly": friendly,
-        "funny": funny,
-        "congratulating": congratulating,
-        "questioning": questioning,
-        "disagreement": disagreement,
-        "tone": tone
-    }
+        return {
+            "friendly": friendly,
+            "funny": funny,
+            "congratulating": congratulating,
+            "questioning": questioning,
+            "disagreement": disagreement,
+            "tone": tone
+        }
+    except Exception as e:
+        print(f"Error generating comments: {e}")
+        return {
+            "friendly": "",
+            "funny": "",
+            "congratulating": "",
+            "questioning": "",
+            "disagreement": "",
+            "tone": "error"
+        }
