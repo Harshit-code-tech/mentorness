@@ -6,6 +6,8 @@ body {
     margin: 0;
     padding: 20px;
     color: #fff;
+    overflow: hidden;
+    position: relative;
 }
 
 @keyframes gradientBackground {
@@ -13,6 +15,27 @@ body {
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
+@keyframes move {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+    100% { transform: translateY(0); }
+}
+
+.bubble {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: move 4s infinite;
+}
+
+.bubble:nth-child(1) { left: 20%; animation-delay: 0s; animation-duration: 4s; }
+.bubble:nth-child(2) { left: 40%; animation-delay: 2s; animation-duration: 6s; }
+.bubble:nth-child(3) { left: 60%; animation-delay: 4s; animation-duration: 5s; }
+.bubble:nth-child(4) { left: 80%; animation-delay: 1s; animation-duration: 7s; }
+.bubble:nth-child(5) { left: 10%; animation-delay: 3s; animation-duration: 3s; }
 
 .container {
     max-width: 800px;
@@ -60,6 +83,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    animation: pulse 2s infinite;
 }
 
 button:hover {
@@ -84,25 +108,11 @@ button:hover {
     margin: 0 0 5px;
 }
 
-.comment.friendly {
-    border-color: #28a745;
-}
-
-.comment.funny {
-    border-color: #ffc107;
-}
-
-.comment.congratulating {
-    border-color: #17a2b8;
-}
-
-.comment.questioning {
-    border-color: #6f42c1;
-}
-
-.comment.disagreement {
-    border-color: #dc3545;
-}
+.comment.friendly { border-color: #28a745; }
+.comment.funny { border-color: #ffc107; }
+.comment.congratulating { border-color: #17a2b8; }
+.comment.questioning { border-color: #6f42c1; }
+.comment.disagreement { border-color: #dc3545; }
 
 @keyframes fadeIn {
     from {
@@ -113,4 +123,10 @@ button:hover {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }

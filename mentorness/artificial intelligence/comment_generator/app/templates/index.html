@@ -7,39 +7,63 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Content Analysis and Comment Generator</h1>
-        <form action="/" method="POST">
-            <label for="content">Enter your text:</label>
-            <textarea id="content" name="content" rows="10" cols="50" required></textarea>
-            <button type="submit">Analyze and Generate Comments</button>
-        </form>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
-        {% if comments %}
-        <div class="results">
-            <h2>Generated Comments</h2>
-            <div class="comment friendly">
-                <h3>Friendly:</h3>
-                <p>{{ comments.friendly }}</p>
-            </div>
-            <div class="comment funny">
-                <h3>Funny:</h3>
-                <p>{{ comments.funny }}</p>
-            </div>
-            <div class="comment congratulating">
-                <h3>Congratulating:</h3>
-                <p>{{ comments.congratulating }}</p>
-            </div>
-            <div class="comment questioning">
-                <h3>Questioning:</h3>
-                <p>{{ comments.questioning }}</p>
-            </div>
-            <div class="comment disagreement">
-                <h3>Disagreement:</h3>
-                <p>{{ comments.disagreement }}</p>
-            </div>
-        </div>
-        {% endif %}
+    <div class="container">
+        <h1>Comment Generator</h1>
+        <form id="commentForm" method="post" action="/">
+            <label for="content">Enter your content:</label>
+            <textarea id="content" name="content" rows="10" required></textarea>
+            <button type="submit">Analyze</button>
+        </form>
+        <div class="results" id="results"></div>
     </div>
+    <script>
+        document.getElementById("commentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const content = document.getElementById("content").value;
+
+            fetch("/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ content })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById("results");
+                resultsDiv.innerHTML = "";
+
+                for (const [type, comment] of Object.entries(data.comments)) {
+                    const commentDiv = document.createElement("div");
+                    commentDiv.classList.add("comment", type);
+
+                    const commentText = document.createElement("h3");
+                    commentText.innerText = type.charAt(0).toUpperCase() + type.slice(1);
+
+                    const commentContent = document.createElement("p");
+                    commentContent.innerText = comment;
+
+                    commentDiv.appendChild(commentText);
+                    commentDiv.appendChild(commentContent);
+                    resultsDiv.appendChild(commentDiv);
+                }
+
+                const commentElements = document.querySelectorAll(".comment");
+                commentElements.forEach((element, index) => {
+                    element.style.animationDelay = `${index * 0.3}s`;
+                    element.style.animation = "fadeIn 1s ease forwards";
+                });
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
 </body>
 </html>
