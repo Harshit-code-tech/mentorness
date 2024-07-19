@@ -1,5 +1,6 @@
 import random
 from .analysis import analyze_sentiment, detect_tone
+
 def generate_friendly_comment(content):
     friendly_templates = [
         "Great read! {snippet}... Keep it up!",
@@ -46,8 +47,8 @@ def generate_disagreement_comment(content):
     return random.choice(disagreement_templates).format(snippet=snippet)
 
 def generate_comments(content):
-    polarity, transformer_sentiment, vader_sentiment = analyze_sentiment(content)
-    tone = detect_tone(polarity, transformer_sentiment, vader_sentiment)
+    polarity, nltk_sentiment, transformer_sentiment, vader_sentiment = analyze_sentiment(content)
+    tone = detect_tone(polarity, nltk_sentiment, transformer_sentiment, vader_sentiment)
 
     friendly = generate_friendly_comment(content)
     funny = generate_funny_comment(content)
@@ -60,5 +61,6 @@ def generate_comments(content):
         "funny": funny,
         "congratulating": congratulating,
         "questioning": questioning,
-        "disagreement": disagreement
+        "disagreement": disagreement,
+        "tone": tone
     }
