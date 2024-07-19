@@ -10,15 +10,14 @@ def analyze_sentiment(content):
 
     blob = TextBlob(content)
     polarity = blob.sentiment.polarity
-    nltk_sentiment = 'positive' if polarity > 0 else 'negative' if polarity < 0 else 'neutral'
 
     analyzer = SentimentIntensityAnalyzer()
     vader_sentiment = analyzer.polarity_scores(content)['compound']
 
-    return polarity, nltk_sentiment, transformer_sentiment['label'], vader_sentiment
+    return polarity, transformer_sentiment['label'], vader_sentiment
 
 
-def detect_tone(polarity, nltk_sentiment, transformer_sentiment, vader_sentiment):
+def detect_tone(polarity, transformer_sentiment, vader_sentiment):
     if transformer_sentiment == 'POSITIVE' and polarity > 0 and vader_sentiment > 0.5:
         return 'positive'
     elif transformer_sentiment == 'NEGATIVE' and polarity < 0 and vader_sentiment < -0.5:

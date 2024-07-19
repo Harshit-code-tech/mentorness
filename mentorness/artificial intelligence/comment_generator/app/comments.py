@@ -1,72 +1,53 @@
 import random
 from .analysis import analyze_sentiment, detect_tone
-
-def get_random_excerpt(content):
-    words = content.split()
-    if len(words) <= 50:
-        return content
-    start_idx = random.randint(0, len(words) - 50)
-    excerpt = ' '.join(words[start_idx:start_idx + 50])
-    return excerpt
-
 def generate_friendly_comment(content):
-    templates = [
-        "Great read! {}... Keep it up!",
-        "Loved this article! {}... Well done!",
-        "This was very insightful. {}... Thank you!",
-        "Wonderful piece! {}... I learned a lot.",
-        "Fantastic! {}... Keep writing!"
+    friendly_templates = [
+        "Great read! {snippet}... Keep it up!",
+        "I really enjoyed this! {snippet}... Fantastic work!",
+        "This is so well-written! {snippet}... Excellent job!"
     ]
-    excerpt = get_random_excerpt(content)
-    return random.choice(templates).format(excerpt)
+    snippet = content[:50]
+    return random.choice(friendly_templates).format(snippet=snippet)
 
 def generate_funny_comment(content):
-    templates = [
-        "LOL! {}... That's hilarious!",
-        "This cracked me up! {}... So funny!",
-        "Haha! {}... Great sense of humor!",
-        "What a funny read! {}... Loved it!",
-        "This made me laugh! {}... Well done!"
+    funny_templates = [
+        "LOL! {snippet}... Hilarious!",
+        "This cracked me up! {snippet}... So funny!",
+        "I couldn't stop laughing at {snippet}... Great sense of humor!"
     ]
-    excerpt = get_random_excerpt(content)
-    return random.choice(templates).format(excerpt)
+    snippet = content[:50]
+    return random.choice(funny_templates).format(snippet=snippet)
 
 def generate_congratulating_comment(content):
-    templates = [
-        "Congratulations on this amazing piece! {}...",
-        "Well done! {}... Fantastic work!",
-        "Great job! {}... Keep it up!",
-        "Bravo! {}... This is excellent!",
-        "Kudos! {}... Impressive article!"
+    congratulating_templates = [
+        "Congratulations on this amazing piece! {snippet}...",
+        "Well done! {snippet}... Keep up the great work!",
+        "Bravo! {snippet}... Impressive achievement!"
     ]
-    excerpt = get_random_excerpt(content)
-    return random.choice(templates).format(excerpt)
+    snippet = content[:50]
+    return random.choice(congratulating_templates).format(snippet=snippet)
 
 def generate_questioning_comment(content):
-    templates = [
-        "Interesting point! Can you elaborate on {}?",
-        "I have a question about {}... Can you explain more?",
-        "Could you clarify {}? I'm curious.",
-        "What do you mean by {}? Please elaborate.",
-        "Can you provide more details on {}? Thanks!"
+    questioning_templates = [
+        "Interesting point! Can you elaborate on {snippet}?",
+        "Could you explain more about {snippet}...?",
+        "I'd love to know more about {snippet}... Could you clarify?"
     ]
-    excerpt = get_random_excerpt(content)
-    return random.choice(templates).format(excerpt)
+    snippet = content[:50]
+    return random.choice(questioning_templates).format(snippet=snippet)
 
 def generate_disagreement_comment(content):
-    templates = [
-        "I don't quite agree with {}... Here's why...",
-        "Not sure I agree with {}... What do you think?",
-        "I see it differently. {}... Let's discuss.",
-        "Interesting perspective, but I disagree with {}...",
-        "I have a different opinion on {}... Let's talk."
+    disagreement_templates = [
+        "I don't quite agree with {snippet}... Here's why...",
+        "Interesting perspective, but I see it differently: {snippet}...",
+        "I respect your opinion, but {snippet}... doesn't resonate with me."
     ]
-    excerpt = get_random_excerpt(content)
-    return random.choice(templates).format(excerpt)
+    snippet = content[:50]
+    return random.choice(disagreement_templates).format(snippet=snippet)
 
 def generate_comments(content):
-    polarity, nltk_sentiment, transformer_sentiment = analyze_sentiment(content)
-    tone = detect_tone(polarity, nltk_sentiment, transformer_sentiment)
+    polarity, transformer_sentiment, vader_sentiment = analyze_sentiment(content)
+    tone = detect_tone(polarity, transformer_sentiment, vader_sentiment)
 
     friendly = generate_friendly_comment(content)
     funny = generate_funny_comment(content)
