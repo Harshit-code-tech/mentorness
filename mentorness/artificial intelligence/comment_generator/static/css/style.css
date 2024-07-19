@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #667eea, #764ba2, #89f7fe, #66a6ff);
     background-size: 400% 400%;
     animation: gradientBackground 15s ease infinite;
     margin: 0;
@@ -22,6 +22,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     backdrop-filter: blur(10px);
+    animation: fadeIn 2s ease;
 }
 
 h1 {
