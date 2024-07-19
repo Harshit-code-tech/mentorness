@@ -6,8 +6,10 @@
     <title>Comment Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js" defer></script>
 </head>
 <body>
+    <div id="particles-js"></div>
     <div class="container">
         <h1>Comment Generator</h1>
         <form action="/" method="post">
@@ -15,7 +17,7 @@
             <button type="submit">Analyze</button>
         </form>
         {% if comments %}
-        <div class="results">
+        <div class="results" id="content-box">
             <h2>Processing Time: {{ processing_time | round(2) }} seconds</h2>
             <div class="tone">Tone Analyzed as: {{ comments['tone'] }}</div>
             {% for type, comment in comments.items() %}
@@ -34,5 +36,34 @@
         </div>
         {% endif %}
     </div>
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 150
+                },
+                "size": {
+                    "value": 3
+                },
+                "move": {
+                    "speed": 2
+                },
+                "opacity": {
+                    "value": 0.5
+                },
+                "color": {
+                    "value": "#ffffff"
+                }
+            },
+            "interactivity": {
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

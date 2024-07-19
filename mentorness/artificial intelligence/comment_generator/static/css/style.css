@@ -4,7 +4,7 @@ body {
     background-size: 400% 400%;
     animation: gradientBackground 15s ease infinite;
     margin: 0;
-    padding: 20px;
+    padding: 0;
     color: #fff;
     overflow: hidden;
     position: relative;
@@ -38,6 +38,15 @@ body {
 .bubble:nth-child(5) { left: 10%; animation-delay: 3s; animation-duration: 3s; }
 .bubble:nth-child(6) { left: 25%; animation-delay: 5s; animation-duration: 6s; }
 .bubble:nth-child(7) { left: 55%; animation-delay: 2.5s; animation-duration: 4.5s; }
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
 
 .container {
     max-width: 800px;
@@ -121,11 +130,50 @@ button:active {
     margin-top: 0;
 }
 
-.friendly { background-color: rgba(0, 255, 0, 0.2); }
-.funny { background-color: rgba(255, 255, 0, 0.2); }
-.congratulating { background-color: rgba(0, 0, 255, 0.2); }
-.questioning { background-color: rgba(255, 165, 0, 0.2); }
-.disagreement { background-color: rgba(255, 0, 0, 0.2); }
+.friendly {
+    background-color: #d0f0c0; /* Light green */
+    border: 2px solid #a8d08d;
+    color: #006400;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.funny {
+    background-color: #f0e68c; /* Light yellow */
+    border: 2px solid #e1c699;
+    color: #ff4500;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.congratulating {
+    background-color: #ffebcd; /* Blanched almond */
+    border: 2px solid #ffdead;
+    color: #8b4513;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.questioning {
+    background-color: #e6e6fa; /* Lavender */
+    border: 2px solid #dcdcdc;
+    color: #0000ff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.disagreement {
+    background-color: #f08080; /* Light coral */
+    border: 2px solid #ff6347;
+    color: #800000;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#content-box {
+    max-height: 500px;
+    overflow-y: auto;
+}
 
 .tone {
     margin-top: 20px;
@@ -135,4 +183,3 @@ button:active {
     border-radius: 4px;
     color: #fff;
 }
-
