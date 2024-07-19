@@ -2,27 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Comment Generation Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Content Analysis and Comment Generation Tool</h1>
-        <form method="post">
-            <textarea name="content" rows="10" cols="80" placeholder="Paste your content here...">{{ content }}</textarea>
-            <br>
+        <h1>Content Analysis and Comment Generator</h1>
+        <form action="/" method="POST">
+            <label for="content">Enter your text:</label>
+            <textarea id="content" name="content" rows="10" cols="50" required></textarea>
             <button type="submit">Analyze and Generate Comments</button>
         </form>
+
         {% if comments %}
-        <h2>Generated Comments:</h2>
-        <ul>
-            <li><strong>Friendly:</strong> {{ comments.friendly }}</li>
-            <li><strong>Funny:</strong> {{ comments.funny }}</li>
-            <li><strong>Congratulating:</strong> {{ comments.congratulating }}</li>
-            <li><strong>Questioning:</strong> {{ comments.questioning }}</li>
-            <li><strong>Disagreement:</strong> {{ comments.disagreement }}</li>
-        </ul>
-        <p><strong>Processing Time:</strong> {{ processing_time }} seconds</p>
+        <div class="results">
+            <h2>Generated Comments</h2>
+            <div class="comment friendly">
+                <h3>Friendly:</h3>
+                <p>{{ comments.friendly }}</p>
+            </div>
+            <div class="comment funny">
+                <h3>Funny:</h3>
+                <p>{{ comments.funny }}</p>
+            </div>
+            <div class="comment congratulating">
+                <h3>Congratulating:</h3>
+                <p>{{ comments.congratulating }}</p>
+            </div>
+            <div class="comment questioning">
+                <h3>Questioning:</h3>
+                <p>{{ comments.questioning }}</p>
+            </div>
+            <div class="comment disagreement">
+                <h3>Disagreement:</h3>
+                <p>{{ comments.disagreement }}</p>
+            </div>
+        </div>
         {% endif %}
     </div>
 </body>
