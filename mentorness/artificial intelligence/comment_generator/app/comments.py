@@ -1,4 +1,3 @@
-#comments.py
 import random
 from .analysis import analyze_sentiment
 from sumy.parsers.plaintext import PlaintextParser
@@ -9,14 +8,19 @@ from sumy.utils import get_stop_words
 from langdetect import detect
 
 def summarize_text(text, sentence_count=1):
-    language = detect(text)
-    parser = PlaintextParser.from_string(text, Tokenizer(language))
-    stemmer = Stemmer(language)
-    summarizer = LsaSummarizer(stemmer)
-    summarizer.stop_words = get_stop_words(language)
+    try:
+        language = detect(text)
+        parser = PlaintextParser.from_string(text, Tokenizer(language))
+        stemmer = Stemmer(language)
+        summarizer = LsaSummarizer(stemmer)
+        summarizer.stop_words = get_stop_words(language)
 
-    summary = summarizer(parser.document, sentence_count)
-    return " ".join(str(sentence) for sentence in summary)
+        summary = summarizer(parser.document, sentence_count)
+        return " ".join(str(sentence) for sentence in summary)
+    except Exception as e:
+        print(f"Error in summarizing text: {e}")
+        return text[:150] + '...'  # Fallback to a simple truncation
+
 
 def generate_friendly_comment(content):
     friendly_templates = [
