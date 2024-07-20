@@ -3,36 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comment Generator</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/particles.min.js') }}" defer></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <title>Comment Generator Tool</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="particles-js"></div>
     <div class="container">
-        <h1>Comment Generator</h1>
-        <form action="/" method="post">
-            <textarea name="content" rows="6" placeholder="Enter text here...">{{ content }}</textarea>
-            <button type="submit" class="animate-button">Analyze</button>
+        <h1>Comment Generator Tool</h1>
+        <form id="commentForm">
+            <textarea id="content" placeholder="Enter content here..."></textarea>
+            <button type="button" id="analyzeButton">Analyze</button>
         </form>
-        {% if comments %}
-        <div class="results">
-            <h2>Processing Time: {{ processing_time | round(2) }} seconds</h2>
-            <div class="tone">Tone Analyzed as: {{ comments['tone'] }}</div>
-            {% for type, comment in comments.items() %}
-                {% if type != 'tone' %}
-                <div class="comment {{ type }}">
-                    <h3>{{ type.capitalize() }} Comment</h3>
-                    <p>{{ comment }}</p>
-                </div>
-                {% endif %}
-            {% endfor %}
+        <div class="results" id="results">
+            <p class="error" id="error"></p>
+            <div class="comment friendly" id="friendly"></div>
+            <div class="comment funny" id="funny"></div>
+            <div class="comment congratulating" id="congratulating"></div>
+            <div class="comment questioning" id="questioning"></div>
+            <div class="comment disagreement" id="disagreement"></div>
         </div>
-        {% endif %}
-        {% if error %}
-        <p class="error">{{ error }}</p>
-        {% endif %}
     </div>
+    <script src="scripts/particles.js"></script>
+    <script src="scripts/app.js"></script>
 </body>
 </html>
