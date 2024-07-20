@@ -1,5 +1,12 @@
-
 import nltk
-nltk.download('stopwords')  # Ensure this is added to download the stop-words
+
+# Download stop-words
+nltk.download('stopwords')
+
 from nltk.corpus import stopwords
-stop_words = stopwords.words('dutch')  # Now this should work without error
+
+# Access stop-words for Finnish and Dutch
+finnish_stop_words = stopwords.words('finnish')
+dutch_stop_words = stopwords.words('dutch')
+
+# Now you can use finnish_stop_words and dutch_stop_words in your application
