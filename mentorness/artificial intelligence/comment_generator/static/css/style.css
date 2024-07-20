@@ -9,9 +9,10 @@ body {
     margin: 0;
     padding: 20px;
     color: #fff;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 @keyframes gradientBackground {
@@ -37,6 +38,7 @@ body {
 
 .container {
     max-width: 800px;
+    max-height: none;
     margin: 0 auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.1);
@@ -44,8 +46,6 @@ body {
     border-radius: 8px;
     backdrop-filter: blur(10px);
     animation: fadeIn 2s ease;
-    overflow-y: auto;
-    max-height: 80vh;
 }
 
 @keyframes fadeIn {
@@ -88,21 +88,42 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
 }
 
 button:hover {
     background-color: #0056b3;
+    box-shadow: 0 4px 15px rgba(0, 91, 255, 0.5);
 }
 
 button:active {
     transform: scale(0.95);
 }
 
+button::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(255, 255, 255, 0.3);
+    width: 300%;
+    height: 300%;
+    transition: opacity 0.5s, transform 0.5s;
+    opacity: 0;
+    border-radius: 50%;
+}
+
+button:active::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
 .results {
     margin-top: 20px;
-    overflow-y: auto;
-    max-height: 40vh;
+    overflow-y: visible;
 }
 
 .results p {
@@ -119,53 +140,12 @@ button:active {
 .comment {
     margin-top: 20px;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
+    border-left: 4px solid;
 }
 
 .comment h3 {
     margin-top: 0;
-}
-
-/* Styles for different comment types */
-.friendly {
-    background-color: rgba(240, 255, 240, 0.2); /* Light green */
-    border: 2px solid rgba(144, 238, 144, 0.5);
-    color: #006400;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.funny {
-    background-color: rgba(255, 255, 224, 0.2); /* Light yellow */
-    border: 2px solid rgba(255, 228, 181, 0.5);
-    color: #ff4500;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.congratulating {
-    background-color: rgba(255, 228, 196, 0.2); /* Blanched almond */
-    border: 2px solid rgba(255, 218, 185, 0.5);
-    color: #8b4513;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.questioning {
-    background-color: rgba(230, 230, 250, 0.2); /* Lavender */
-    border: 2px solid rgba(220, 220, 220, 0.5);
-    color: #0000ff;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.disagreement {
-    background-color: rgba(240, 128, 128, 0.2); /* Light coral */
-    border: 2px solid rgba(255, 99, 71, 0.5);
-    color: #800000;
-    padding: 10px;
-    border-radius: 5px;
 }
 
 .tone {
@@ -175,4 +155,29 @@ button:active {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     color: #fff;
+}
+
+/* Styles for different comment types */
+.friendly {
+    border-color: #66bb6a;
+}
+
+.funny {
+    border-color: #ffb74d;
+}
+
+.congratulating {
+    border-color: #ffeb3b;
+}
+
+.questioning {
+    border-color: #42a5f5;
+}
+
+.disagreement {
+    border-color: #ef5350;
+}
+
+.tone {
+    border-color: #ffffff;
 }
