@@ -1,0 +1,28 @@
+comment_generation_tool/
+│
+├── app/
+│   ├── __init__.py
+│   ├── analysis.py
+│   ├── comments.py
+│   ├── routes.py
+│   ├── config.py
+│   └── templates/
+│       ├── layout/
+│       │   └── base.html
+│       └── index.html
+│
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   ├── script.js
+│   │   └── particles_config.json
+│   └── favicon.ico
+│
+├── tests/
+│   ├── test_analysis.py
+│   └── test_comments.py
+│
+├── requirements.txt
+├── run.py
+└── README.md
