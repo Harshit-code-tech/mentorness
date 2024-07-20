@@ -8,6 +8,9 @@ from sumy.utils import get_stop_words
 from langdetect import detect
 
 def summarize_text(text, sentence_count=1):
+    """
+    Summarizes the input text using LSA summarization.
+    """
     try:
         language = detect(text)
         parser = PlaintextParser.from_string(text, Tokenizer(language))
@@ -19,10 +22,13 @@ def summarize_text(text, sentence_count=1):
         return " ".join(str(sentence) for sentence in summary)
     except Exception as e:
         print(f"Error in summarizing text: {e}")
-        return text[:150] + '...'  # Fallback to a simple truncation
-
+        # Provide a fallback summary if summarization fails
+        return text[:150] + '...'
 
 def generate_friendly_comment(content):
+    """
+    Generates a friendly comment based on the content.
+    """
     friendly_templates = [
         "Great read! {snippet}... Keep it up!",
         "I really enjoyed this! {snippet}... Fantastic work!",
@@ -32,6 +38,9 @@ def generate_friendly_comment(content):
     return random.choice(friendly_templates).format(snippet=snippet)
 
 def generate_funny_comment(content):
+    """
+    Generates a funny comment based on the content.
+    """
     funny_templates = [
         "LOL! {snippet}... Hilarious!",
         "This cracked me up! {snippet}... So funny!",
@@ -41,6 +50,9 @@ def generate_funny_comment(content):
     return random.choice(funny_templates).format(snippet=snippet)
 
 def generate_congratulating_comment(content):
+    """
+    Generates a congratulating comment based on the content.
+    """
     congratulating_templates = [
         "Congratulations on this amazing piece! {snippet}...",
         "Well done! {snippet}... Keep up the great work!",
@@ -50,6 +62,9 @@ def generate_congratulating_comment(content):
     return random.choice(congratulating_templates).format(snippet=snippet)
 
 def generate_questioning_comment(content):
+    """
+    Generates a questioning comment based on the content.
+    """
     questioning_templates = [
         "Interesting point! Can you elaborate on {snippet}?",
         "Could you explain more about {snippet}...?",
@@ -59,6 +74,9 @@ def generate_questioning_comment(content):
     return random.choice(questioning_templates).format(snippet=snippet)
 
 def generate_disagreement_comment(content):
+    """
+    Generates a disagreement comment based on the content.
+    """
     disagreement_templates = [
         "I don't quite agree with {snippet}... Here's why...",
         "Interesting perspective, but I see it differently: {snippet}...",
@@ -68,30 +86,29 @@ def generate_disagreement_comment(content):
     return random.choice(disagreement_templates).format(snippet=snippet)
 
 def generate_comments(content):
+    """
+    Generates various types of comments based on sentiment analysis.
+    """
     try:
         polarity, nltk_sentiment, transformer_sentiment, vader_sentiment, tone = analyze_sentiment(content)
 
-        friendly = generate_friendly_comment(content)
-        funny = generate_funny_comment(content)
-        congratulating = generate_congratulating_comment(content)
-        questioning = generate_questioning_comment(content)
-        disagreement = generate_disagreement_comment(content)
-
+        # Generate comments based on the content
         return {
-            "friendly": friendly,
-            "funny": funny,
-            "congratulating": congratulating,
-            "questioning": questioning,
-            "disagreement": disagreement,
+            "friendly": generate_friendly_comment(content),
+            "funny": generate_funny_comment(content),
+            "congratulating": generate_congratulating_comment(content),
+            "questioning": generate_questioning_comment(content),
+            "disagreement": generate_disagreement_comment(content),
             "tone": tone
         }
     except Exception as e:
         print(f"Error generating comments: {e}")
+        # Provide default error comments
         return {
-            "friendly": "",
-            "funny": "",
-            "congratulating": "",
-            "questioning": "",
-            "disagreement": "",
+            "friendly": "Error generating friendly comment.",
+            "funny": "Error generating funny comment.",
+            "congratulating": "Error generating congratulating comment.",
+            "questioning": "Error generating questioning comment.",
+            "disagreement": "Error generating disagreement comment.",
             "tone": "error"
         }
