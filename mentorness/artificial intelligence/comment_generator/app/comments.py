@@ -14,6 +14,9 @@ def summarize_text(text, sentence_count=1):
     """
     try:
         language = detect(text)
+        if language not in ['en']:  # Check if the language is supported
+            return text[:150] + '...'
+
         parser = PlaintextParser.from_string(text, Tokenizer(language))
         stemmer = Stemmer(language)
         summarizer = LsaSummarizer(stemmer)
@@ -22,7 +25,6 @@ def summarize_text(text, sentence_count=1):
         summary = summarizer(parser.document, sentence_count)
         return " ".join(str(sentence) for sentence in summary)
     except Exception as e:
-        # Log the error
         print(f"Error in summarizing text: {e}")
         # Provide a fallback summary if summarization fails
         return text[:150] + '...'
