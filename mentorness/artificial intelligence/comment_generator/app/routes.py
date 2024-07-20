@@ -1,3 +1,4 @@
+# routes.py
 from flask import Blueprint, render_template, request
 import time
 from app.comments import generate_comments  # Updated import
