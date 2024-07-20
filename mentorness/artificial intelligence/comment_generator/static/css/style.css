@@ -1,5 +1,6 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Lato', sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2, #89f7fe, #66a6ff);
     background-size: 400% 400%;
     animation: gradientBackground 15s ease infinite;
@@ -16,82 +17,71 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-@keyframes move {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(10px); }
-    100% { transform: translateY(0); }
-}
-
-.bubble {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    animation: move 4s infinite;
-}
-
-.bubble:nth-child(1) { left: 20%; animation-delay: 0s; animation-duration: 4s; }
-.bubble:nth-child(2) { left: 40%; animation-delay: 2s; animation-duration: 6s; }
-.bubble:nth-child(3) { left: 60%; animation-delay: 4s; animation-duration: 5s; }
-.bubble:nth-child(4) { left: 80%; animation-delay: 1s; animation-duration: 7s; }
-.bubble:nth-child(5) { left: 10%; animation-delay: 3s; animation-duration: 3s; }
-.bubble:nth-child(6) { left: 25%; animation-delay: 5s; animation-duration: 6s; }
-.bubble:nth-child(7) { left: 55%; animation-delay: 2.5s; animation-duration: 4.5s; }
-
 #particles-js {
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -1;
+    z-index: -1; /* Ensure it is behind other content */
 }
 
+/* Container Styles */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 600px;
+    margin: 50px auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
     backdrop-filter: blur(10px);
     animation: fadeIn 2s ease;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Heading Styles */
 h1 {
     text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
     color: #fff;
     animation: fadeIn 2s ease;
 }
 
+/* Form Styles */
 form {
     display: flex;
     flex-direction: column;
     animation: fadeIn 2s ease;
 }
 
-label {
-    margin-bottom: 10px;
-    font-weight: bold;
+textarea {
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    resize: vertical;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    outline: none;
 }
 
-textarea {
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
+textarea::placeholder {
+    color: #bbb;
 }
 
 button {
-    padding: 10px;
-    font-size: 16px;
+    padding: 15px;
+    font-size: 1em;
     color: #fff;
     background-color: #007BFF;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
 }
@@ -104,75 +94,15 @@ button:active {
     transform: scale(0.95);
 }
 
+/* Result Styles */
 .results {
     margin-top: 20px;
+    animation: fadeIn 2s ease;
 }
 
-.results p {
-    margin: 0;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-}
-
-.error {
-    color: #ff4d4d;
-}
-
-.comment {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-}
-
-.comment h3 {
-    margin-top: 0;
-}
-
-.friendly {
-    background-color: #d0f0c0; /* Light green */
-    border: 2px solid #a8d08d;
-    color: #006400;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.funny {
-    background-color: #f0e68c; /* Light yellow */
-    border: 2px solid #e1c699;
-    color: #ff4500;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.congratulating {
-    background-color: #ffebcd; /* Blanched almond */
-    border: 2px solid #ffdead;
-    color: #8b4513;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.questioning {
-    background-color: #e6e6fa; /* Lavender */
-    border: 2px solid #dcdcdc;
-    color: #0000ff;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.disagreement {
-    background-color: #f08080; /* Light coral */
-    border: 2px solid #ff6347;
-    color: #800000;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-#content-box {
-    max-height: 500px;
-    overflow-y: auto;
+.results h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }
 
 .tone {
@@ -182,4 +112,58 @@ button:active {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     color: #fff;
+}
+
+.comment {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    animation: fadeIn 2s ease;
+}
+
+/* Comment Types */
+.friendly {
+    background-color: #d0f0c0; /* Light green */
+    border: 2px solid #a8d08d;
+    color: #006400;
+}
+
+.funny {
+    background-color: #f0e68c; /* Light yellow */
+    border: 2px solid #e1c699;
+    color: #ff4500;
+}
+
+.congratulating {
+    background-color: #ffebcd; /* Blanched almond */
+    border: 2px solid #ffdead;
+    color: #8b4513;
+}
+
+.questioning {
+    background-color: #e6e6fa; /* Lavender */
+    border: 2px solid #dcdcdc;
+    color: #0000ff;
+}
+
+.disagreement {
+    background-color: #f08080; /* Light coral */
+    border: 2px solid #ff6347;
+    color: #800000;
+}
+
+/* Error Styles */
+.error {
+    color: #ff4d4d;
+    background-color: rgba(255, 77, 77, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Make sure the content area is scrollable */
+#content-box {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
 }
