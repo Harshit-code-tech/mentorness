@@ -47,6 +47,60 @@ body {
     backdrop-filter: blur(10px);
     animation: fadeIn 2s ease;
 }
+/* Add the button animation */
+@keyframes buttonAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    animation: buttonAnimation 2s infinite;
+}
+
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 15px rgba(0, 91, 255, 0.5);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: rgba(255, 255, 255, 0.3);
+    width: 300%;
+    height: 300%;
+    transition: opacity 0.5s, transform 0.5s;
+    opacity: 0;
+    border-radius: 50%;
+}
+
+button:active::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
 
 @keyframes fadeIn {
     from {
@@ -148,16 +202,15 @@ button:active::before {
     margin-top: 0;
 }
 
-.tone {
-    margin-top: 20px;
+/* Translucent tone boxes */
+.friendly, .funny, .congratulating, .questioning, .disagreement, .tone {
+    background-color: rgba(0, 0, 0, 0.2); /* Same background color for consistency */
+    border-left: 4px solid; /* Retain the colored left border */
     padding: 10px;
-    font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-    color: #fff;
+    border-radius: 5px;
+    color: #fff; /* Ensure the text color is white */
 }
 
-/* Styles for different comment types */
 .friendly {
     border-color: #66bb6a;
 }
@@ -177,6 +230,7 @@ button:active::before {
 .disagreement {
     border-color: #ef5350;
 }
+
 
 .tone {
     border-color: #ffffff;

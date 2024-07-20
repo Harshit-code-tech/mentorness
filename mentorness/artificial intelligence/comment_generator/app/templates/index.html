@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comment Generator</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="particles-js"></div>
@@ -15,19 +13,19 @@
         <h1>Comment Generator</h1>
         <form action="/" method="post">
             <textarea name="content" rows="6" placeholder="Enter text here...">{{ content }}</textarea>
-            <button type="submit">Analyze</button>
+            <button type="submit" class="animate-button">Analyze</button>
         </form>
         {% if comments %}
         <div class="results">
             <h2>Processing Time: {{ processing_time | round(2) }} seconds</h2>
             <div class="tone">Tone Analyzed as: {{ comments['tone'] }}</div>
             {% for type, comment in comments.items() %}
-            {% if type != 'tone' %}
-            <div class="comment {{ type }}">
-                <h3>{{ type | capitalize }}</h3>
-                <p>{{ comment }}</p>
-            </div>
-            {% endif %}
+                {% if type != 'tone' %}
+                <div class="comment {{ type }}">
+                    <h3>{{ type | capitalize }}</h3>
+                    <p>{{ comment }}</p>
+                </div>
+                {% endif %}
             {% endfor %}
         </div>
         {% endif %}
