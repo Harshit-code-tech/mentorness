@@ -4,7 +4,6 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 def analyze_sentiment(content):
     try:
-        # Initialize sentiment pipelines and analyzers
         transformer_sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
         transformer_sentiment = transformer_sentiment_pipeline(content)[0]
 
@@ -14,6 +13,10 @@ def analyze_sentiment(content):
 
         analyzer = SentimentIntensityAnalyzer()
         vader_sentiment = analyzer.polarity_scores(content)['compound']
+
+        print(f"Transformer Sentiment: {transformer_sentiment}")
+        print(f"TextBlob Polarity: {polarity}")
+        print(f"VADER Sentiment: {vader_sentiment}")
 
         tone = detect_tone(polarity, nltk_sentiment, transformer_sentiment['label'], vader_sentiment)
 
@@ -25,9 +28,12 @@ def analyze_sentiment(content):
             'tone': tone
         }
     except Exception as e:
-        return {'error': f"An error occurred: {str(e)}"}
+        print(f"Error in analyzing sentiment: {e}")
+        return {'error': "Error analyzing sentiment"}
+
 
 def detect_tone(polarity, nltk_sentiment, transformer_sentiment, vader_sentiment):
+
     try:
         if transformer_sentiment == 'POSITIVE' and polarity > 0 and vader_sentiment > 0.5:
             return 'positive'
