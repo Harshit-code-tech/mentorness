@@ -23,17 +23,15 @@
             {% for type, comment in comments.items() %}
                 {% if type != 'tone' %}
                 <div class="comment {{ type }}">
-                    <h3>{{ type | capitalize }}</h3>
+                    <h3>{{ type.capitalize() }} Comment</h3>
                     <p>{{ comment }}</p>
                 </div>
                 {% endif %}
             {% endfor %}
         </div>
         {% endif %}
-        {% if comments['tone'] == 'error' %}
-        <div class="error">
-            An error occurred while generating comments.
-        </div>
+        {% if error %}
+        <p class="error">{{ error }}</p>
         {% endif %}
     </div>
 </body>
