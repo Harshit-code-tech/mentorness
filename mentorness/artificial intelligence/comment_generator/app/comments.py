@@ -22,6 +22,7 @@ def summarize_text(text, sentence_count=1):
         summary = summarizer(parser.document, sentence_count)
         return " ".join(str(sentence) for sentence in summary)
     except Exception as e:
+        # Log the error
         print(f"Error in summarizing text: {e}")
         # Provide a fallback summary if summarization fails
         return text[:150] + '...'
@@ -44,9 +45,13 @@ def generate_friendly_comment(content, tone):
             "This didn’t resonate with me. {snippet}... Maybe refine your points?"
         ]
     }
-    snippet = summarize_text(content)
-    return random.choice(friendly_templates.get(tone, friendly_templates['neutral'])).format(snippet=snippet)
-
+    try:
+        snippet = summarize_text(content)
+        return random.choice(friendly_templates.get(tone, friendly_templates['neutral'])).format(snippet=snippet)
+    except Exception as e:
+        # Log the error
+        print(f"Error generating friendly comment: {e}")
+        return "Error generating friendly comment."
 
 def generate_funny_comment(content, tone):
     funny_templates = {
@@ -66,9 +71,13 @@ def generate_funny_comment(content, tone):
             "I didn’t find this funny. {snippet}... Maybe less is more?"
         ]
     }
-    snippet = summarize_text(content)
-    return random.choice(funny_templates.get(tone, funny_templates['neutral'])).format(snippet=snippet)
-
+    try:
+        snippet = summarize_text(content)
+        return random.choice(funny_templates.get(tone, funny_templates['neutral'])).format(snippet=snippet)
+    except Exception as e:
+        # Log the error
+        print(f"Error generating funny comment: {e}")
+        return "Error generating funny comment."
 
 def generate_congratulating_comment(content, tone):
     congratulating_templates = {
@@ -88,9 +97,13 @@ def generate_congratulating_comment(content, tone):
             "A valiant effort. {snippet}... Needs more work."
         ]
     }
-    snippet = summarize_text(content)
-    return random.choice(congratulating_templates.get(tone, congratulating_templates['neutral'])).format(snippet=snippet)
-
+    try:
+        snippet = summarize_text(content)
+        return random.choice(congratulating_templates.get(tone, congratulating_templates['neutral'])).format(snippet=snippet)
+    except Exception as e:
+        # Log the error
+        print(f"Error generating congratulating comment: {e}")
+        return "Error generating congratulating comment."
 
 def generate_questioning_comment(content, tone):
     questioning_templates = {
@@ -110,9 +123,13 @@ def generate_questioning_comment(content, tone):
             "Not clear on {snippet}... What’s your reasoning?"
         ]
     }
-    snippet = summarize_text(content)
-    return random.choice(questioning_templates.get(tone, questioning_templates['neutral'])).format(snippet=snippet)
-
+    try:
+        snippet = summarize_text(content)
+        return random.choice(questioning_templates.get(tone, questioning_templates['neutral'])).format(snippet=snippet)
+    except Exception as e:
+        # Log the error
+        print(f"Error generating questioning comment: {e}")
+        return "Error generating questioning comment."
 
 def generate_disagreement_comment(content, tone):
     disagreement_templates = {
@@ -132,9 +149,13 @@ def generate_disagreement_comment(content, tone):
             "I find {snippet}... problematic. Here’s my argument."
         ]
     }
-    snippet = summarize_text(content)
-    return random.choice(disagreement_templates.get(tone, disagreement_templates['neutral'])).format(snippet=snippet)
-
+    try:
+        snippet = summarize_text(content)
+        return random.choice(disagreement_templates.get(tone, disagreement_templates['neutral'])).format(snippet=snippet)
+    except Exception as e:
+        # Log the error
+        print(f"Error generating disagreement comment: {e}")
+        return "Error generating disagreement comment."
 
 def generate_comments(content):
     try:
@@ -166,6 +187,7 @@ def generate_comments(content):
             "tone": tone
         }
     except Exception as e:
+        # Log the error
         print(f"Error generating comments: {e}")
         return {
             "friendly": "",
