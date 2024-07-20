@@ -90,15 +90,15 @@ button {
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     position: relative;
     overflow: hidden;
-    animation: slideAnimation 10s ease-in-out infinite;
+    animation: buttonAnimation 2s infinite;
 }
 
-@keyframes slideAnimation {
+@keyframes buttonAnimation {
     0%, 100% {
-        transform: translateX(0);
+        transform: scale(1);
     }
     50% {
-        transform: translateX(5px);
+        transform: scale(1.05);
     }
 }
 
