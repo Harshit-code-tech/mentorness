@@ -1,3 +1,4 @@
+# config.py
 class Config:
     # Configuration settings can go here
     DEBUG = True
