@@ -7,3 +7,5 @@ pandas
 numpy
 vaderSentiment
 torch
+langid==1.1.6
+
