@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, request, flash
+# routes.py
+from flask import Blueprint, render_template, request
 import time
-from .comments import generate_comments
+from app.comments import generate_comments
 
 main = Blueprint('main', __name__)
-
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -18,9 +18,17 @@ def index():
             if not content:
                 error_message = "Content cannot be empty."
             else:
+                # Generate comments based on the content
                 comments = generate_comments(content)
+
+                # Handle errors in comments generation
+                if comments['tone'] == 'error':
+                    error_message = "Error generating comments. Please try again."
+                    comments = None  # Clear comments if there's an error
     except Exception as e:
-        error_message = str(e)
+        # Handle unexpected errors
+        error_message = f"An unexpected error occurred: {str(e)}"
+        comments = None
 
     end_time = time.time()
     processing_time = end_time - start_time

@@ -1,3 +1,4 @@
+// script.js
 // Initialize the canvas and context
 const canvas = document.getElementById('particleCanvas');
 const ctx = canvas.getContext('2d');
@@ -29,8 +30,10 @@ class Particle {
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
+        // Fade in and out
         if (this.alpha < 1) this.alpha += 0.01;
         if (this.alpha >= 1) this.alpha -= 0.01;
+        // Shrink and reset size
         if (this.size > 0.2) this.size -= 0.05;
         if (this.size <= 0.2) this.size = Math.random() * particleSize + 1;
         this.draw();
@@ -47,20 +50,18 @@ function initParticles() {
 // Animate particles
 function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(particle => {
-        particle.update();
-    });
+    particles.forEach(particle => particle.update());
     requestAnimationFrame(animateParticles);
 }
 
-// Adjust canvas size on window resize
+// Adjust canvas size and particle array on window resize
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    particles.length = 0;
-    initParticles();
+    particles.length = 0;  // Clear existing particles
+    initParticles();  // Reinitialize particles
 });
 
-// Initialize and animate particles
+// Initialize and start particle animation
 initParticles();
 animateParticles();
